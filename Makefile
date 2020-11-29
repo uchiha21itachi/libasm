@@ -2,7 +2,7 @@
 # # $ nasm -fmacho64 hello.asm && ld hello.o && ./a.out
 
 # # Linux
-# # $ nasm -felf64 hello.asm && ld hello.o && ./a.out
+# # $ nasm -felf64 
 
 
 SRCS =	ft_strlen.s \
@@ -17,6 +17,7 @@ NA			=	nasm
 NA_FLAGS	=	-f elf64
 FLAGS 		=	-Wall -Werror -Wextra
 NAME		=	libasm.a
+TEST		=	include/main.c
 
 %.o:			%.s
 				$(NA) $(NA_FLAGS) $<
@@ -27,12 +28,18 @@ $(NAME):		$(OBJS)
 				ar rcs $(NAME) $(OBJS)
 				ranlib $(NAME)
 
+test:
+				gcc $(TEST) $(NAME)
+
 clean:
 				rm -rf $(OBJS) $(BONUS_OBJS)
 
 fclean:			clean
 				rm -rf $(NAME)
 
+tclean:			clean
+				rm -rf $(NAME) a.out
+
 re:				fclean $(NAME)
 
-.PHONY:			clean fclean re test 
+.PHONY:			clean fclean re tclean test
