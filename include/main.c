@@ -40,17 +40,22 @@ void	test_read_write(void)
 
     printf("\n\n--------- FT_READ --------\n");
    
-    // ft_read(0, "", 15);
-    // ft_read(0, str, 15);
-    // read(0, str, 15);
+    i = read(-1, "", 15);
+	printf("OG -> i - [%d]\n", i);
+	i = ft_read(-1, "", 15);
+	printf("FT -> i - [%d]\n", i);
+    
+	printf("\n\n");
+    i = read(0, str, 1);
+	printf("OG -> i - [%d]\n", i);
+	i = ft_read(0, str, 1);
+	printf("FT -> i - [%d]\n", i);
+
+	printf("\n\n");
 
 
-    // printf("--- FT_WRITE ---\n");
+    printf("--- END ---\n");
 	
-	// ft_write(1, "hwll\n", 5);
-	// ft_write(1, str, 10);
-	// write(1, str, 10);
-
 }
 
 void	test_strlen(void)
@@ -134,9 +139,9 @@ void	test_strdup(void)
 
 int main()
 {
-//    test_strlen();
+   test_strlen();
    test_strcpy();
-//    test_strcmp();
-//    test_strdup();
-//    test_read_write();
+   test_strcmp();
+   test_strdup();
+   test_read_write();
 }

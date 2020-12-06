@@ -8,11 +8,11 @@ global  ft_strdup
 
 ft_strdup:
     mov     r12, rdi
-    call    ft_strlen wrt ..plt
+    call    ft_strlen
     mov     rdi, rax
     inc     rdi
-    call    malloc wrt ..plt
+    call    malloc
     mov     rdi, rax
     mov     rsi, r12
-    call    ft_strcpy wrt ..plt
+    call    ft_strcpy
     ret

@@ -30,6 +30,7 @@ $(NAME):		$(OBJS)
 
 test:
 				gcc $(TEST) $(NAME)
+				./a.out
 
 clean:
 				rm -rf $(OBJS) $(BONUS_OBJS)
