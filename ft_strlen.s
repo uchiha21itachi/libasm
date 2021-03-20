@@ -1,7 +1,13 @@
-global	ft_strlen
+%ifdef __LINUX__
+    %define MY_STRLEN ft_strlen
+%else
+    %define MY_STRLEN _ft_strlen
+%endif
+
+global  MY_STRLEN
 
 		section	.text
-ft_strlen:
+MY_STRLEN:
 		mov		rax, 0
 		cmp		byte [rdi], 0
 		je		fin

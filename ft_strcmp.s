@@ -1,8 +1,14 @@
-global  ft_strcmp
+%ifdef __LINUX__
+    %define MY_STRCMP ft_strcmp
+%else
+    %define MY_STRCMP _ft_strcmp
+%endif
+
+global  MY_STRCMP
 
 section .text
 
-ft_strcmp:
+MY_STRCMP:
     mov     rcx, 0
     movzx   rax, byte[rdi + rcx]
     movzx   rdx, byte[rsi + rcx]

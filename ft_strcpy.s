@@ -1,8 +1,14 @@
-global  ft_strcpy
+%ifdef __LINUX__
+    %define MY_STRCPY ft_strcpy
+%else
+    %define MY_STRCPY _ft_strcpy
+%endif
 
-    section .text
+global  MY_STRCPY
 
-ft_strcpy:
+section .text
+
+MY_STRCPY:
         mov     rax, rdi
         mov     rdx, 0
         cmp     byte[rsi + rdx], 0

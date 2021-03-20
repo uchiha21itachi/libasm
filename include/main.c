@@ -10,33 +10,49 @@ extern  size_t 	ft_write(int fd, const void *buf, size_t count);
 extern  size_t	ft_read(int fd,  void *buf, size_t count);
 extern	char	*ft_strdup(char *s);
 
-void	test_read_write(void)
+void	test_write(void)
 {
 	char *str;
 
 	int i = 0;
 	str = "hello guys";
 
+
     printf("--- FT_WRITE ---\n");
 	
 
 	i = write(1, NULL, 10);
-	printf("OG -> i - [%d]\n", i);
+	printf("\nOG -> i - [%d]\n", i);
 	i = ft_write(1, NULL, 10);
-	printf("FT -> i - [%d]\n", i);
+	printf("\nFT -> i - [%d]\n", i);
 	
 	printf("\n\n");
-	i = write(10, "bonjour", 10);
-	printf("OG -> i - [%d]\n", i);
-	i = ft_write(10, "bonjour", 10);
-	printf("FT -> i - [%d]\n", i);
+	i = write(1, "bonjour", 11);
+	printf("\nOG -> i - [%d] ..\n", i);
+	i = ft_write(1, "bonjour", 11);
+	printf("\nFT -> i - [%d] ..\n", i);
+
 
 
 	printf("\n\n");
-	i = write(-31, str, 10);
-	printf("OG -> i - [%d]\n", i);
-	i = ft_write(-31, str, 10);
-	printf("FT -> i - [%d]\n", i);
+	i = write(1, "bonjour", -1);
+	printf("\nOG -> i - [%d] ..\n", i);
+	i = ft_write(1, "bonjour", -1);
+	printf("\nFT -> i - [%d] ..\n", i);
+
+	printf("\n\n");
+	i = write(1, str, 10);
+	printf("\nOG -> i - [%d]\n", i);
+	i = ft_write(1, str, 10);
+	printf("\nFT -> i - [%d]\n", i);
+}
+
+void	test_read(void)
+{
+	char *str;
+
+	int i = 0;
+	str = "hello guys";
 
     printf("\n\n--------- FT_READ --------\n");
    
@@ -137,9 +153,9 @@ void	test_strdup(void)
 	char str[30] = "hello world";
 	char *str2;
 
-	// str2 = ft_strdup(str);
-	// printf("my_dup - [%s] \n", str2);
-	// free(str2);
+	str2 = ft_strdup(str);
+	printf("my_dup - [%s] \n", str2);
+	free(str2);
 }
 
 int main()
@@ -147,6 +163,7 @@ int main()
 //    test_strlen();
 //    test_strcpy();
 //    test_strcmp();
-   test_strdup();
-//    test_read_write();
+//    test_strdup();
+   test_write();
+//    test_read();
 }

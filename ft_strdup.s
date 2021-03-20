@@ -1,27 +1,35 @@
+%ifdef __LINUX__
+    %define CALL_HELPER wrt ..plt
+    %define MY_STRDUP ft_strdup
+    %define MY_STRLEN ft_strlen
+    %define MY_STRCPY ft_strcpy
+    %define OG_MALLOC malloc
+%else
+    %define CALL_HELPER
+    %define MY_STRDUP _ft_strdup
+    %define MY_STRLEN _ft_strlen
+    %define MY_STRCPY _ft_strcpy
+    %define OG_MALLOC _malloc
+%endif
 
-extern ft_strlen
-extern ft_strcpy
-extern malloc
+extern MY_STRCPY
+extern MY_STRLEN
+extern OG_MALLOC
 
-
-global ft_strdup
+global MY_STRDUP
 
 section .text
-; char *ft_strdup(const char *str);
-ft_strdup:
-    push rdi         ; save rdi because it will be overwrite for malloc
-
-    call ft_strlen  ; rdi is still == str
-    inc  rax          ; len++ for '\0'
-
-    mov  rdi, rax     ; size to malloc
-    call malloc wrt ..plt
+MY_STRDUP:
+    push rdi            ; save rdi since malloc will overwrite it
+    call MY_STRLEN      ; rdi is still == str
+    inc  rax            ; len++ for '\0'
+    mov  rdi, rax       ; size to malloc
+    call OG_MALLOC      ; Calling malloc will return pointer to rax
     cmp  rax, 0
     je   ft_strdup_error
-
-    pop  rsi          ; original str as src
-    mov  rdi, rax     ; allocated as dest
-    call ft_strcpy
+    pop  rsi            ; original push rdi str as src
+    mov  rdi, rax       ; rdi is given destination pointer rax
+    call MY_STRCPY
     ret
 ft_strdup_error:
     pop  rdi

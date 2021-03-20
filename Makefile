@@ -4,6 +4,20 @@
 # # Linux
 # # $ nasm -felf64 
 
+UNAME_S				:= $(shell uname -s)
+OS					= 0
+
+ifeq ($(UNAME_S), Linux)
+	OS = 1
+	NA_FLAGS	=	-f elf64
+else ifeq ($(UNAME_S), Darwin)
+	OS = 2
+	NA_FLAGS	=	-f macho64
+endif
+
+$(info    OS is $(UNAME_S))
+$(info    NA_FLAGS is $(NA_FLAGS))
+
 
 SRCS =	ft_strlen.s \
 ft_strcmp.s \
@@ -14,7 +28,6 @@ ft_strdup.s \
 
 OBJS		=	$(SRCS:.s=.o)
 NA			=	nasm
-NA_FLAGS	=	-f elf64
 FLAGS 		=	-Wall -Werror -Wextra
 NAME		=	libasm.a
 TEST		=	include/main.c
