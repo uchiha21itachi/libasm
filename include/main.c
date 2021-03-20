@@ -134,14 +134,19 @@ void	test_strdup(void)
 	str_dup = strdup(str_dup2);
 	printf("og - [%s]\n", str_dup);
 	free(str_dup);
+	char str[30] = "hello world";
+	char *str2;
 
+	// str2 = ft_strdup(str);
+	// printf("my_dup - [%s] \n", str2);
+	// free(str2);
 }
 
 int main()
 {
-   test_strlen();
-   test_strcpy();
-   test_strcmp();
+//    test_strlen();
+//    test_strcpy();
+//    test_strcmp();
    test_strdup();
-   test_read_write();
+//    test_read_write();
 }
