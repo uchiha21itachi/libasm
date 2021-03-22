@@ -1,29 +1,41 @@
+;# **************************************************************************** #
+;#                                                                              #
+;#                                                         :::      ::::::::    #
+;#    ft_write.s                                         :+:      :+:    :+:    #
+;#                                                     +:+ +:+         +:+      #
+;#    By: yassharm <marvin@42.fr>                    +#+  +:+       +#+         #
+;#                                                 +#+#+#+#+#+   +#+            #
+;#    Created: 2021/03/22 15:26:38 by yassharm          #+#    #+#              #
+;#    Updated: 2021/03/22 15:26:40 by yassharm         ###   ########.fr        #
+;#                                                                              #
+;# **************************************************************************** #
+
 %ifdef __LINUX__
-    %define CALL_HELPER wrt ..plt
-    %define ERROR_NO __errno_location
-    %define MY_WRITE ft_write
+	%define CALL_HELPER wrt ..plt
+	%define ERROR_NO __errno_location
+	%define SYS_WRITE
+	%define MY_WRITE ft_write
 %else
-    %define CALL_HELPER
-    %define ERROR_NO ___error
-    %define MY_WRITE _ft_write
+	%define CALL_HELPER
+	%define ERROR_NO ___error
+	%define SYS_WRITE 0x2000004
+	%define MY_WRITE _ft_write
 %endif
 
 extern ERROR_NO
 
-global  MY_WRITE
+global	MY_WRITE
 
 section .text
 
-; int ft_write(int rdi, const void *rsi, size_t rdx);
-
 MY_WRITE:
-	mov		rax, 0x2000004
+	mov		rax, SYS_WRITE
 	syscall
 %ifdef __LINUX__
-    cmp rax, 0
-    jl  show_error
+	cmp		rax, 0
+	jl		show_error
 %else
-    jc  show_error
+	jc		show_error
 %endif
 	ret
 	

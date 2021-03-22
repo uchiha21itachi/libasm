@@ -1,26 +1,38 @@
-%ifdef __LINUX__
-    %define MY_STRCPY ft_strcpy
+;# **************************************************************************** #
+;#                                                                              #
+;#                                                         :::      ::::::::    #
+;#    ft_strcpy.s                                        :+:      :+:    :+:    #
+;#                                                     +:+ +:+         +:+      #
+;#    By: yassharm <marvin@42.fr>                    +#+  +:+       +#+         #
+;#                                                 +#+#+#+#+#+   +#+            #
+;#    Created: 2021/03/22 15:21:15 by yassharm          #+#    #+#              #
+;#    Updated: 2021/03/22 15:21:17 by yassharm         ###   ########.fr        #
+;#                                                                              #
+;# **************************************************************************** #
+
+%ifdef	__LINUX__
+	%define MY_STRCPY ft_strcpy
 %else
-    %define MY_STRCPY _ft_strcpy
+	%define MY_STRCPY _ft_strcpy
 %endif
 
-global  MY_STRCPY
+global	MY_STRCPY
 
-section .text
+section	.text
 
 MY_STRCPY:
-        mov     rax, rdi
-        mov     rdx, 0
-        cmp     byte[rsi + rdx], 0
-        je      stop
+	mov		rax, rdi
+	mov		rdx, 0
+	cmp		byte[rsi + rdx], 0
+	je		stop
 
 start_copy:
-        mov     cl, byte[rsi + rdx]
-        mov     byte[rax + rdx], cl
-        inc     rdx
-        cmp     byte[rsi + rdx], 0
-        jne     start_copy
+	mov		cl, byte[rsi + rdx]
+	mov		byte[rax + rdx], cl
+	inc		rdx
+	cmp		byte[rsi + rdx], 0
+	jne		start_copy
 stop:
-        mov     cl, byte[rsi + rdx]
-        mov     byte[rax + rdx], cl
-        ret
+	mov		cl, byte[rsi + rdx]
+	mov		byte[rax + rdx], cl
+	ret

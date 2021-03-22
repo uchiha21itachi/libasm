@@ -49,26 +49,30 @@ void	test_write(void)
 
 void	test_read(void)
 {
-	char *str;
+	char str[20];
 
 	int i = 0;
-	str = "hello guys";
 
     printf("\n\n--------- FT_READ --------\n");
    
-    i = read(-1, "", 15);
-	printf("OG -> i - [%d]\n", i);
-	i = ft_read(-1, "", 15);
-	printf("FT -> i - [%d]\n", i);
-    
-	printf("\n\n");
-    i = read(0, str, 1);
-	printf("OG -> i - [%d]\n", i);
-	i = ft_read(0, str, 1);
-	printf("FT -> i - [%d]\n", i);
+    // i = read(1, str, 15);
+	// printf("OG -> i - [%d]\n", i);
+	// printf("OG -> str - [%s]\n", str);
 
-	printf("\n\n");
+ 	// i = ft_read(1, str, 15);
+	// printf("FT -> i - [%d]\n", i);
+	// printf("FT -> str - [%s]\n", str);
 
+	char buf_read[2048];
+	int tmp[2];
+
+	// i = read(-1, buf_read, 2);
+	// printf("OG -> i - [%d]\n", i);
+	// printf("OG -> str - [%s]\n", str);
+	
+	i = ft_read(-1, buf_read, 2);
+	printf("FT -> i - [%d]\n", i);
+	printf("FT -> str - [%s]\n", str);
 
     printf("--- END ---\n");
 	
@@ -164,6 +168,6 @@ int main()
 //    test_strcpy();
 //    test_strcmp();
 //    test_strdup();
-   test_write();
-//    test_read();
+//    test_write();
+   test_read();
 }
