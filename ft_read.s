@@ -10,10 +10,10 @@
 ;#                                                                              #
 ;# **************************************************************************** #
 
-%ifdef __LINUX__
+%ifdef __OUTPUT_FORMAT__, elf64
 	%define CALL_HELPER wrt ..plt
 	%define ERROR_NO __errno_location
-	%define SYS_READ
+	%define SYS_READ 0
 	%define MY_READ ft_read
 %else
 	%define CALL_HELPER
@@ -31,7 +31,7 @@ section .text
 MY_READ:
 	mov		rax, SYS_READ
 	syscall
-%ifdef __LINUX__
+%ifdef __OUTPUT_FORMAT__, elf64
 	cmp		rax, 0
 	jl		show_error
 %else
@@ -40,7 +40,7 @@ MY_READ:
 	ret
 
 show_error:
-%ifdef __LINUX__
+%ifdef __OUTPUT_FORMAT__, elf64
 	neg		rax
 %endif
 	push	rax

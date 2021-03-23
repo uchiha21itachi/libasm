@@ -10,7 +10,7 @@
 ;#                                                                              #
 ;# **************************************************************************** #
 
-%ifdef __LINUX__
+%ifdef __OUTPUT_FORMAT__, elf64
 	%define MY_STRLEN ft_strlen
 %else
 	%define MY_STRLEN _ft_strlen

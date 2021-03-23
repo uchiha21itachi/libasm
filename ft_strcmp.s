@@ -10,8 +10,8 @@
 ;#                                                                              #
 ;# **************************************************************************** #
 
-%ifdef	__LINUX__
-	%define	MY_STRCMPft_strcmp
+%ifdef	__OUTPUT_FORMAT__, elf64
+	%define	MY_STRCMP ft_strcmp
 %else
 	%define	MY_STRCMP _ft_strcmp
 %endif

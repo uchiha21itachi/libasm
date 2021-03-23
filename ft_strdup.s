@@ -10,7 +10,7 @@
 ;#                                                                              #
 ;# **************************************************************************** #
 
-%ifdef __LINUX__
+%ifdef __OUTPUT_FORMAT__, elf64
 	%define CALL_HELPER wrt ..plt
 	%define MY_STRDUP ft_strdup
 	%define MY_STRLEN ft_strlen
