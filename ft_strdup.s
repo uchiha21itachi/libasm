@@ -32,15 +32,15 @@ global MY_STRDUP
 
 section .text
 MY_STRDUP:
-	push	rdi				; save rdi since malloc will overwrite it
-	call	MY_STRLEN		; rdi is still == str
-	inc		rax				; len++ for '\0'
-	mov		rdi, rax		; size to malloc
-	call	OG_MALLOC		; Calling malloc will return pointer to rax
+	push	rdi						; save rdi since malloc will overwrite it
+	call	MY_STRLEN				; rdi is still == str
+	inc		rax						; len++ for '\0'
+	mov		rdi, rax				; size to malloc
+	call	OG_MALLOC CALL_HELPER	; Calling malloc will return pointer to rax
 	cmp		rax, 0
 	je		ft_strdup_error
-	pop		rsi				; original push rdi str as src
-	mov		rdi, rax		; rdi is given destination pointer rax
+	pop		rsi						; original push rdi str as src
+	mov		rdi, rax				; rdi is given destination pointer rax
 	call	MY_STRCPY
 	ret
 ft_strdup_error:
