@@ -10,7 +10,7 @@
 ;#                                                                              #
 ;# **************************************************************************** #
 
-%ifdef	__OUTPUT_FORMAT__, elf64
+%ifidn __OUTPUT_FORMAT__, elf64
 	%define MY_STRCPY ft_strcpy
 %else
 	%define MY_STRCPY _ft_strcpy

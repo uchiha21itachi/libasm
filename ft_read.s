@@ -10,7 +10,7 @@
 ;#                                                                              #
 ;# **************************************************************************** #
 
-%ifdef __OUTPUT_FORMAT__, elf64
+%ifidn __OUTPUT_FORMAT__, elf64
 	%define CALL_HELPER wrt ..plt
 	%define ERROR_NO __errno_location
 	%define SYS_READ 0
@@ -31,7 +31,7 @@ section .text
 MY_READ:
 	mov		rax, SYS_READ
 	syscall
-%ifdef __OUTPUT_FORMAT__, elf64
+%ifidn __OUTPUT_FORMAT__, elf64
 	cmp		rax, 0
 	jl		show_error
 %else
@@ -40,7 +40,7 @@ MY_READ:
 	ret
 
 show_error:
-%ifdef __OUTPUT_FORMAT__, elf64
+%ifidn __OUTPUT_FORMAT__, elf64
 	neg		rax
 %endif
 	push	rax
